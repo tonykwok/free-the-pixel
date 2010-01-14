@@ -177,12 +177,6 @@ public class FrameWithDropShadow extends JFrame {
 
 			this.buttonClose = createTitleButton();
 			this.buttonClose.setIcon(getIconClose());
-			if (SubstanceLookAndFeel.isCurrentLookAndFeel()) {
-				// //TODO WHAT s this?
-				// this.buttonClose.putClientProperty(SubstanceButtonUI
-				// .IS_TITLE_CLOSE_BUTTON, Boolean.TRUE);
-			}
-
 			this.buttonClose.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(final ActionEvent e) {

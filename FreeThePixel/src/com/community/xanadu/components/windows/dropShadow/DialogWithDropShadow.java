@@ -27,13 +27,11 @@ import javax.swing.border.LineBorder;
 import org.pushingpixels.substance.api.DecorationAreaType;
 import org.pushingpixels.substance.api.SubstanceColorScheme;
 import org.pushingpixels.substance.api.SubstanceLookAndFeel;
-import org.pushingpixels.substance.internal.ui.SubstanceButtonUI;
 import org.pushingpixels.substance.internal.utils.SubstanceCoreUtilities;
 import org.pushingpixels.substance.internal.utils.SubstanceTitleButton;
 import org.pushingpixels.substance.internal.utils.icon.SubstanceIconFactory;
 import org.pushingpixels.substance.internal.utils.icon.TransitionAwareIcon;
 
-import com.community.xanadu.components.buttons.shape.DeleteButton;
 import com.community.xanadu.components.windows.WindowFadeInManager;
 import com.community.xanadu.demo.components.DialogWithDropShadowDemo;
 import com.community.xanadu.listeners.Draggable;
@@ -52,11 +50,12 @@ public class DialogWithDropShadow extends JDialog {
 	private boolean withCloseButton;
 
 	public DialogWithDropShadow(final Window frame) {
-		this(frame, true, false);
+		this(frame, true, true);
 	}
 
 	public DialogWithDropShadow(final Window frame, final boolean draggable, final boolean withCloseButton) {
 		super(frame);
+		setModal(true);
 		this.withCloseButton = withCloseButton;
 		initGUI();
 		if (draggable) {
@@ -173,24 +172,19 @@ public class DialogWithDropShadow extends JDialog {
 
 			if (SubstanceLookAndFeel.isCurrentLookAndFeel()) {
 				this.buttonClose = new SubstanceTitleButton();
-
-				this.buttonClose.setFocusPainted(false);
-				this.buttonClose.setFocusable(false);
-				this.buttonClose.setOpaque(true);
-
-				this.buttonClose.setText(null);
-				this.buttonClose.setBorder(null);
-
 				this.buttonClose.putClientProperty(SubstanceLookAndFeel.FLAT_PROPERTY, Boolean.TRUE);
-				this.buttonClose.putClientProperty(SubstanceButtonUI.IS_TITLE_CLOSE_BUTTON, Boolean.TRUE);
 				SubstanceLookAndFeel.setDecorationType(this.buttonClose, DecorationAreaType.GENERAL);
-
-				this.buttonClose.setIcon(getIconClose());
 			} else {
-				this.buttonClose = new DeleteButton();
-				((DeleteButton) this.buttonClose).setArmedColor(Color.BLACK);
-				((DeleteButton) this.buttonClose).setDefaultColor(Color.BLACK);
+				this.buttonClose = new JButton();
+				this.buttonClose.setContentAreaFilled(false);
 			}
+			this.buttonClose.setIcon(getIconClose());
+			this.buttonClose.setFocusPainted(false);
+			this.buttonClose.setFocusable(false);
+			this.buttonClose.setOpaque(true);
+
+			this.buttonClose.setText(null);
+			this.buttonClose.setBorder(null);
 
 			this.buttonClose.setFocusable(false);
 
