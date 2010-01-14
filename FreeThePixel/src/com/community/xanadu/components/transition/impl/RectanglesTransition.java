@@ -10,11 +10,10 @@ import com.community.xanadu.components.transition.ShapeTransition;
 public class RectanglesTransition extends ShapeTransition {
 	public RectanglesTransition(final Window frame) {
 		super(frame);
-		this.shrinkImage = false;
 	}
 
 	@Override
-	public Shape getShape() {
+	public Shape getShape(final float animFraction) {
 		final int stepSize = 50;
 		final int numRect = 1 + this.renderingComp.getHeight() / stepSize;
 
@@ -22,8 +21,8 @@ public class RectanglesTransition extends ShapeTransition {
 
 		final Rectangle[] rects = new Rectangle[numRect];
 		for (int n = 0; n < numRect; n++) {
-			rects[n] = new Rectangle(0, (int) (stepSize * n - stepSize / 2 * getAnimProgress()), this.renderingComp
-					.getWidth(), (int) (stepSize * getAnimProgress()));
+			rects[n] = new Rectangle(0, (int) (stepSize * n - stepSize / 2 * animFraction), this.renderingComp
+					.getWidth(), (int) (stepSize * animFraction));
 			toHide.add(new Area(rects[n]));
 		}
 

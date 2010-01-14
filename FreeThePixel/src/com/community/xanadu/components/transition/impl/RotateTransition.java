@@ -13,14 +13,14 @@ public class RotateTransition extends CloseTransition {
 	}
 
 	@Override
-	protected void paintImage(final Graphics g) {
+	protected void paintImage(final Graphics g,final float animFraction) {
 		final Graphics2D g2 = (Graphics2D) g.create();
-		final float i = 1 - getAnimProgress();
+		final float i = 1 - getAnimFraction();
 		g2.setComposite(AlphaComposite.SrcOver.derive(i));
 
-		g2.rotate(Math.PI / 4 * getAnimProgress());
+		g2.rotate(Math.PI / 4 * animFraction);
 
-		g2.drawImage(this.originalImage, (int) (this.originalImage.getWidth() * getAnimProgress()) / 2, 0,
+		g2.drawImage(this.originalImage, (int) (this.originalImage.getWidth() * animFraction) / 2, 0,
 				(int) (this.originalImage.getWidth() * i), (int) (this.originalImage.getHeight() * i), null);
 		g2.dispose();
 	}

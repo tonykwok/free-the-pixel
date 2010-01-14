@@ -10,12 +10,11 @@ public class FadeOutTransition extends ShapeTransition {
 
 	public FadeOutTransition(final Window frame) {
 		super(frame);
-		this.shrinkImage = false;
 	}
 
 	@Override
-	public Shape getShape() {
-		Rectangle shape = new Rectangle(0, 0, (int) (this.originalImage.getWidth()), (int) (this.originalImage
+	public Shape getShape(final float animFraction) {
+		final Rectangle shape = new Rectangle(0, 0, (this.originalImage.getWidth()), (this.originalImage
 				.getHeight()));
 		return shape;
 	}
