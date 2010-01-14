@@ -19,21 +19,21 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.swingx.graphics.GraphicsUtilities;
 import org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel;
 
-import com.community.xanadu.components.IpodLikeScroller;
-import com.community.xanadu.components.IpodLikeScroller.Item;
+import com.community.xanadu.components.CoverFlow;
+import com.community.xanadu.components.CoverFlow.Item;
 import com.community.xanadu.components.transition.impl.PinchTransition;
 import com.community.xanadu.listeners.Draggable;
 import com.community.xanadu.utils.PaintUtils;
 import com.community.xanadu.utils.WindowsUtils;
 
-public class IPodLikeScrollerDemo {
+public class CoverFlowDemo {
 	public static void main(final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(new SubstanceBusinessBlueSteelLookAndFeel());
-				} catch (UnsupportedLookAndFeelException e1) {
+				} catch (final UnsupportedLookAndFeelException e1) {
 				}
 
 				final JFrame f = new JFrame();
@@ -41,14 +41,14 @@ public class IPodLikeScrollerDemo {
 				f.getContentPane().setLayout(new MigLayout("fill,inset 0 0 0 0"));
 				WindowsUtils.setOpaque(f, false);
 
-				final IpodLikeScroller scroller = new IpodLikeScroller();
+				final CoverFlow scroller = new CoverFlow();
 				f.getContentPane().add(scroller, "push,grow,wrap");
 				new Draggable(f);
-				JPanel p = new JPanel();
+				final JPanel p = new JPanel();
 				p.setBackground(new Color(0, 0, 0, 128));
 				f.add(p, "grow,h 5");
 
-				JButton closeButton = new JButton("Close");
+				final JButton closeButton = new JButton("Close");
 				closeButton.setContentAreaFilled(false);
 				closeButton.addActionListener(new ActionListener() {
 					@Override
@@ -59,9 +59,9 @@ public class IPodLikeScrollerDemo {
 				p.add(closeButton, BorderLayout.EAST);
 
 				for (int i = 0; i < 50; i++) {
-					BufferedImage img = GraphicsUtilities.createCompatibleTranslucentImage(
-							IpodLikeScroller.ItemWidthSize, IpodLikeScroller.ItemHeighSize);
-					Graphics2D g = (Graphics2D) img.createGraphics();
+					final BufferedImage img = GraphicsUtilities.createCompatibleTranslucentImage(
+							CoverFlow.ItemWidthSize, CoverFlow.ItemHeighSize);
+					final Graphics2D g = img.createGraphics();
 					PaintUtils.turnOnAntialias(g);
 					g.setColor(new Color((int) (Math.random() * 255), (int) (Math.random() * 255),
 							(int) (Math.random() * 255)));

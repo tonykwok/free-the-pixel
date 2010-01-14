@@ -1,5 +1,7 @@
 package com.community.xanadu.demo.components;
 
+import java.awt.Container;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -10,31 +12,55 @@ import net.miginfocom.swing.MigLayout;
 
 import org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel;
 
+import com.community.xanadu.components.windows.dropShadow.DialogWithDropShadow;
 import com.community.xanadu.components.windows.dropShadow.FrameWithDropShadow;
 
 public class FrameWithDropShadowDemo {
 	public static void main(final String[] args) {
+
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 
-				try {
-					UIManager.setLookAndFeel(new SubstanceDustCoffeeLookAndFeel());
-				} catch (final UnsupportedLookAndFeelException e) {
+				if (args.length > 1) {
+
+					if (args[0].equals("substance")) {
+						try {
+							UIManager.setLookAndFeel(new SubstanceDustCoffeeLookAndFeel());
+						} catch (final UnsupportedLookAndFeelException e) {
+						}
+					}
+
+					if (args[1].equals("frame")) {
+						final FrameWithDropShadow f = new FrameWithDropShadow();
+						f.setSize(300, 200);
+						f.setTitle("Person info");
+						addContent(f.getContentPane());
+						f.startShowAnim();
+					} else {
+						final DialogWithDropShadow f = new DialogWithDropShadow(null);
+						f.setSize(300, 200);
+						f.setTitle("Person info");
+						addContent(f.getContentPane());
+						f.startShowAnim();
+					}
+				} else {
+					final FrameWithDropShadow f = new FrameWithDropShadow();
+					f.setSize(300, 200);
+					f.setTitle("Person info");
+					addContent(f.getContentPane());
+					f.startShowAnim();
 				}
-				final FrameWithDropShadow f = new FrameWithDropShadow();
-				f.setSize(300, 200);
 
-				f.setTitle("Person info");
-				f.getContentPane().setLayout(new MigLayout("wrap 2"));
-
-				f.getContentPane().add(new JLabel("Name:"), "");
-				f.getContentPane().add(new JTextField(15), "growx,pushx");
-				f.getContentPane().add(new JLabel("Adress"), "");
-				f.getContentPane().add(new JTextField(15), "growx");
-
-				f.startShowAnim();
 			}
 		});
+	}
+
+	private static void addContent(Container cont) {
+		cont.setLayout(new MigLayout("wrap 2"));
+		cont.add(new JLabel("Name:"), "");
+		cont.add(new JTextField(15), "growx,pushx");
+		cont.add(new JLabel("Adress"), "");
+		cont.add(new JTextField(15), "growx");
 	}
 }

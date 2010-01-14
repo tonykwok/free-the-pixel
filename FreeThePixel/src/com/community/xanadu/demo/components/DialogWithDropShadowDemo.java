@@ -17,10 +17,10 @@ public class DialogWithDropShadowDemo {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(new SubstanceDustCoffeeLookAndFeel());
-				} catch (final UnsupportedLookAndFeelException e) {
-				}
+//				try {
+//					UIManager.setLookAndFeel(new SubstanceDustCoffeeLookAndFeel());
+//				} catch (final UnsupportedLookAndFeelException e) {
+//				}
 
 				final DialogWithDropShadow f = new DialogWithDropShadow(null);
 				f.setSize(300, 200);

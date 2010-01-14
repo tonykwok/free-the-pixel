@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -13,7 +18,7 @@ import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel;
+import org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel;
 
 import com.community.xanadu.components.transition.CloseTransition;
 import com.community.xanadu.components.transition.impl.CircleTransition;
@@ -32,7 +37,7 @@ public class CloseTransitionDemo extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UIManager.setLookAndFeel(new SubstanceBusinessBlueSteelLookAndFeel());
+					UIManager.setLookAndFeel(new SubstanceGraphiteAquaLookAndFeel());
 					JFrame.setDefaultLookAndFeelDecorated(true);
 				} catch (final UnsupportedLookAndFeelException e1) {
 				}
@@ -119,17 +124,24 @@ public class CloseTransitionDemo extends JFrame {
 	public JFrame getFrameTransition() {
 		if (this.frameTransition == null) {
 			this.frameTransition = new JFrame();
-			this.frameTransition.getContentPane().setLayout(new MigLayout("fill,wrap 3"));
-			for (int i = 0; i < 20; i++) {
-				this.frameTransition.getContentPane().add(new JButton("" + i));
-			}
-			this.frameTransition.setSize(900, 600);
+			this.frameTransition.getContentPane().setLayout(new MigLayout("fill"));
+			
+			this.frameTransition.getContentPane().add(new JScrollPane(new JTree()), "grow");
+			this.frameTransition.getContentPane().add(new JScrollPane(new JTextArea()), "grow,wrap");
+			this.frameTransition.getContentPane().add(new JLabel("field 1"), "split 2");
+			this.frameTransition.getContentPane().add(new JTextField(), "growx,wrap");
+			this.frameTransition.getContentPane().add(new JLabel("field 2"), "split 2");
+			this.frameTransition.getContentPane().add(new JTextField(), "growx");
+			this.frameTransition.getContentPane().add(new JButton("Cancel"), "right,split 2");
+			this.frameTransition.getContentPane().add(new JButton("OK"), "");
+			this.frameTransition.setBounds(100,100,400, 250);
 		}
 		return this.frameTransition;
 	}
 
 	private void startCloseTransition(final CloseTransition transition) {
-		transition.setAnimDuration(500);
+			
+		transition.setAnimDuration(5000);
 		transition.setEndAction(new AbstractAction() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
@@ -139,7 +151,7 @@ public class CloseTransitionDemo extends JFrame {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				ThreadUtils.sleepQuietly(500);
+				ThreadUtils.sleepQuietly(1000);
 				transition.startCloseTransition();
 			}
 		}).start();
