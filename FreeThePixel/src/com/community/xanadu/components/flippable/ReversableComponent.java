@@ -10,8 +10,8 @@ import javax.swing.SwingUtilities;
 
 public class ReversableComponent extends JLayeredPane {
 
-	private JPanel frontComp = new JPanel(new BorderLayout());
-	private JPanel backComp = new JPanel(new BorderLayout());
+	private final JPanel frontComp = new JPanel(new BorderLayout());
+	private final JPanel backComp = new JPanel(new BorderLayout());
 	private Dimension size;
 	private boolean noAnimation;
 	private int animDuration;
@@ -37,10 +37,11 @@ public class ReversableComponent extends JLayeredPane {
 	}
 
 	public void flip(final JComponent nextComp) {
-		if (this.frontComp.isShowing())
+		if (this.frontComp.isShowing()) {
 			setBack(nextComp);
-		else
+		} else {
 			setFront(nextComp);
+		}
 
 		revalidate();
 		// start in a new thread so the next comp will got it layout done one
@@ -59,7 +60,7 @@ public class ReversableComponent extends JLayeredPane {
 	}
 
 	public void flip() {
-		ComponentFlipper flipper = new ComponentFlipper(this.animDuration);
+		final ComponentFlipper flipper = new ComponentFlipper(this.animDuration);
 		flipper.setNoAnimation(this.noAnimation);
 		if (this.frontComp.isShowing()) {
 			flipper.flip(this.frontComp, this.backComp, this);
@@ -70,30 +71,18 @@ public class ReversableComponent extends JLayeredPane {
 
 	@Override
 	public Dimension getPreferredSize() {
-		// Dimension fd = this.frontComp.getPreferredSize();
-		// System.out.println(fd);
-		// Dimension bd = this.backComp.getPreferredSize();
-		// System.out.println(bd);
-		// Dimension d = new Dimension(Math.max(fd.width, bd.width),
-		// Math.max(fd.height, bd.height));
+
 		return this.size;
 	}
 
 	@Override
 	public void doLayout() {
 		// Rectangle r = getBounds();
-		Dimension d = this.size;// getPreferredSize();
+		final Dimension d = this.size;// getPreferredSize();
 
 		this.frontComp.setBounds(0, 0, (int) d.getWidth(), (int) d.getHeight());
 
 		this.backComp.setBounds(0, 0, (int) d.getWidth(), (int) d.getHeight());
-
-		// this.frontComp.setBounds((r.width / 2) - (d.width / 2), (r.height /
-		// 2) - (d.height / 2), d.width, d.height);
-		//
-		// this.backComp.setBounds((r.width / 2) - (d.width / 2), (r.height / 2)
-		// - (d.height / 2), d.width, d.height);
-
 	}
 
 	@Override
