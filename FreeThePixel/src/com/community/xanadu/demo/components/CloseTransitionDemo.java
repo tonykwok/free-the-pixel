@@ -8,9 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -50,6 +52,7 @@ public class CloseTransitionDemo extends JFrame {
 	}
 
 	private JFrame frameTransition;
+	private JSpinner spinner;
 
 	public CloseTransitionDemo() {
 		super();
@@ -116,6 +119,13 @@ public class CloseTransitionDemo extends JFrame {
 			}
 		});
 		getContentPane().add(b, "growx");
+		
+		spinner=new JSpinner();
+		SpinnerNumberModel model=new SpinnerNumberModel(500, 100, 5000, 10);
+		spinner.setModel(model);
+		getContentPane().add(new JLabel("Duration:"),"split 2");
+		getContentPane().add(spinner);
+		
 
 		setSize(500, 300);
 
@@ -141,7 +151,7 @@ public class CloseTransitionDemo extends JFrame {
 
 	private void startCloseTransition(final CloseTransition transition) {
 			
-		transition.setAnimDuration(5000);
+		transition.setAnimDuration((Integer)spinner.getValue());
 		transition.setEndAction(new AbstractAction() {
 			@Override
 			public void actionPerformed(final ActionEvent arg0) {
