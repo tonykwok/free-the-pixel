@@ -26,7 +26,7 @@ public abstract class CloseTransition {
 	// the image of the window
 	protected BufferedImage originalImage;
 
-	private float animProgress;
+	private float animFraction;
 
 	// window where is displayed the animation
 	private Window comp;
@@ -54,7 +54,7 @@ public abstract class CloseTransition {
 		if (this.comp instanceof JDialog) {
 			((JDialog) this.comp).setModal(false);
 		}
-		this.animDuration = 300;
+		this.animDuration = 500;
 		this.endAction = new AbstractAction() {
 			@Override
 			public void actionPerformed(final ActionEvent e) {
@@ -63,20 +63,23 @@ public abstract class CloseTransition {
 		};
 	}
 
-	public void setAnimProgress(final float animProgress) {
-		this.animProgress = animProgress;
-		this.window.repaint();
+	public void setAnimFraction(final float animProgress) {
+		this.animFraction = animProgress;
+		if(this.window!=null)
+		{
+			this.window.repaint();
+		}
 	}
 
 	protected class TransitionRenderer extends JComponent {
 		@Override
 		protected void paintComponent(final Graphics g) {
 			super.paintComponent(g);
-			paintImage(g);
+			paintImage(g,getAnimFraction());
 		}
 	}
 
-	protected abstract void paintImage(final Graphics g);
+	protected abstract void paintImage(final Graphics g,float animFraction);
 
 	public void startCloseTransition() {
 		this.window.setSize(this.comp.getSize());
@@ -102,7 +105,7 @@ public abstract class CloseTransition {
 				CloseTransition.this.comp.setVisible(false);
 
 				final Timeline timeline = new Timeline(CloseTransition.this);
-				timeline.addPropertyToInterpolate("animProgress", 0f, 1f);
+				timeline.addPropertyToInterpolate("animFraction", 0f, 1f);
 				timeline.setDuration(CloseTransition.this.animDuration);
 				timeline.setEase(new Spline(.7f));
 				timeline.addCallback(new TimelineCallbackAdapter() {
@@ -133,8 +136,8 @@ public abstract class CloseTransition {
 		this.renderingComp = null;
 	}
 
-	public float getAnimProgress() {
-		return this.animProgress;
+	public float getAnimFraction() {
+		return this.animFraction;
 	}
 
 	public void setAnimDuration(final int animDuration) {
@@ -143,5 +146,8 @@ public abstract class CloseTransition {
 
 	public void setEndAction(final AbstractAction endAction) {
 		this.endAction = endAction;
+	}
+	public int getAnimDuration() {
+		return this.animDuration;
 	}
 }
