@@ -4,22 +4,19 @@ import java.awt.Component;
 import java.awt.Window;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 import org.pushingpixels.trident.Timeline;
 import org.pushingpixels.trident.Timeline.TimelineState;
 import org.pushingpixels.trident.callback.TimelineCallback;
 
-import com.community.xanadu.utils.ThreadUtils;
 import com.community.xanadu.utils.WindowsUtils;
 
 public class WindowFadeInManager {
-	private static int FADE_IN_DURATION = 1000;
+	private static int FADE_IN_DURATION = 500;
 
 	public static void fadeIn(final Window window, final int duration) {
-		TimelineCallback tt = new TimelineCallback() {
+		final TimelineCallback tt = new TimelineCallback() {
 			@Override
 			public void onTimelinePulse(final float durationFraction, final float timelinePosition) {
 				WindowsUtils.setOpacity(window, timelinePosition);
@@ -33,7 +30,7 @@ public class WindowFadeInManager {
 			}
 		};
 		WindowsUtils.setOpacity(window, 0);
-		Timeline anim = new Timeline();
+		final Timeline anim = new Timeline();
 		anim.setDuration(duration);
 		anim.addCallback(tt);
 
@@ -50,7 +47,7 @@ public class WindowFadeInManager {
 	}
 
 	public static void fadeOut(final Window window, final int duration) {
-		TimelineCallback tt = new TimelineCallback() {
+		final TimelineCallback tt = new TimelineCallback() {
 			@Override
 			public void onTimelinePulse(final float durationFraction, final float timelinePosition) {
 				WindowsUtils.setOpacity(window, 1 - timelinePosition);
@@ -65,7 +62,7 @@ public class WindowFadeInManager {
 				}
 			}
 		};
-		Timeline anim = new Timeline();
+		final Timeline anim = new Timeline();
 		anim.setDuration(duration);
 		anim.addCallback(tt);
 		anim.play();
@@ -77,7 +74,7 @@ public class WindowFadeInManager {
 
 	public static int fadeIn(final JOptionPane optionPane, final String title, final Component parent,
 			final int duration) {
-		JDialog dialog = optionPane.createDialog(parent, title);
+		final JDialog dialog = optionPane.createDialog(parent, title);
 		fadeIn(dialog, duration);
 		return (Integer) optionPane.getValue();
 	}
