@@ -126,7 +126,13 @@ public class ColorLayerUIDemo extends JFrame {
 		});
 		dialog.getContentPane().add(ok, "split 2 , spanx ,bottom, right,sg 1,pushy");
 		dialog.getContentPane().add(cancel, "sg 1,bottom");
-		dialog.setBounds(250, 200, 300, 200);
+		
+		final int w=300;
+		final int h=200;
+		final int x=(getWidth()-w)/2+getX();
+		final int y=(getHeight()-w)/2+getY();
+
+		dialog.setBounds(x,y,w,h);
 
 		this.lockui.ShowUI();
 		dialog.startShowAnim();
