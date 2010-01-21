@@ -23,30 +23,30 @@ import com.jidesoft.swing.OverlayableUtils;
 
 public class ValidationPanelIcon extends JPanel {
 
-	private static BufferedImage defaultImage;
+	private static BufferedImage defaultIcon;
 	public static int DEFAULT_XOFFSET = 4;
 	public static int DEFAULT_YOFFSET = 4;
 
 	public static int DEFAULT_ICON_LOCATION = DefaultOverlayable.NORTH_EAST;
 
-	public static void setDefaultImage(final BufferedImage defaultImage) {
-		ValidationPanelIcon.defaultImage = defaultImage;
+	public static void setDefaultIcon(final BufferedImage defaultImage) {
+		ValidationPanelIcon.defaultIcon = defaultImage;
 	}
 
-	public static BufferedImage getDefaultImage() {
-		if (defaultImage == null) {
+	public static BufferedImage getDefaultIcon() {
+		if (defaultIcon == null) {
 			final Icon icon = OverlayableUtils.getPredefinedOverlayIcon(OverlayableIconsFactory.ERROR);
-			defaultImage = GraphicsUtilities.createCompatibleTranslucentImage(13, 13);
-			Graphics2D g2 = (Graphics2D) defaultImage.getGraphics();
+			defaultIcon = GraphicsUtilities.createCompatibleTranslucentImage(13, 13);
+			Graphics2D g2 = (Graphics2D) defaultIcon.getGraphics();
 			icon.paintIcon(null, g2, 1, 1);
 			g2.dispose();
-			new ColorTintFilter(Color.BLACK, 1f).filter(defaultImage, defaultImage);
-			new GaussianFilter(2).filter(defaultImage, defaultImage);
-			g2 = (Graphics2D) defaultImage.getGraphics();
+			new ColorTintFilter(Color.BLACK, 1f).filter(defaultIcon, defaultIcon);
+			new GaussianFilter(2).filter(defaultIcon, defaultIcon);
+			g2 = (Graphics2D) defaultIcon.getGraphics();
 			icon.paintIcon(null, g2, 0, 0);
 			g2.dispose();
 		}
-		return defaultImage;
+		return defaultIcon;
 	}
 
 	private BufferedImage image;
@@ -57,7 +57,7 @@ public class ValidationPanelIcon extends JPanel {
 		setPreferredSize(new Dimension(13, 13));
 		this.alpha = 1;
 		if (showIcon) {
-			this.image = getDefaultImage();
+			this.image = getDefaultIcon();
 		}
 		setOpaque(false);
 	}
