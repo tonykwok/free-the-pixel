@@ -77,7 +77,7 @@ public class ValidationOverlayFactory {
 		return over;
 	}
 //---------------------------
-	public static void check(final JComponent comp) {
+	public static void validate(final JComponent comp) {
 		comp.firePropertyChange(ValidationOverlayFactory.CHECK_NEEDED, true, false);
 	}
 }

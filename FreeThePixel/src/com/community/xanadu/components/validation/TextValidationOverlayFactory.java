@@ -53,17 +53,17 @@ public class TextValidationOverlayFactory {
 		textComp.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void changedUpdate(final DocumentEvent e) {
-				ValidationOverlayFactory.check(textComp);
+				ValidationOverlayFactory.validate(textComp);
 			}
 
 			@Override
 			public void insertUpdate(final DocumentEvent e) {
-				ValidationOverlayFactory.check(textComp);
+				ValidationOverlayFactory.validate(textComp);
 			}
 
 			@Override
 			public void removeUpdate(final DocumentEvent e) {
-				ValidationOverlayFactory.check(textComp);
+				ValidationOverlayFactory.validate(textComp);
 			}
 		});
 	}

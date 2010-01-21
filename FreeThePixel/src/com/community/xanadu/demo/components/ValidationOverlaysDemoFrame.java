@@ -134,7 +134,7 @@ public class ValidationOverlaysDemoFrame extends javax.swing.JFrame {
 			spinner.addChangeListener(new ChangeListener() {
 				@Override
 				public void stateChanged(final ChangeEvent e) {
-					ValidationOverlayFactory.check(spinner);
+					ValidationOverlayFactory.validate(spinner);
 				}
 			});
 			getContentPane().add(ValidationOverlayFactory.createBlinkingAndIcon(spinner, c), "growx");
@@ -143,7 +143,7 @@ public class ValidationOverlaysDemoFrame extends javax.swing.JFrame {
 			spinner2.addChangeListener(new ChangeListener() {
 				@Override
 				public void stateChanged(final ChangeEvent e) {
-					ValidationOverlayFactory.check(spinner2);
+					ValidationOverlayFactory.validate(spinner2);
 				}
 			});
 			getContentPane().add(ValidationOverlayFactory.createErrorOverlayedIcon(spinner2, c), "growx");
