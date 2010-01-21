@@ -27,7 +27,7 @@ public class ValidationOverlay extends DefaultOverlayable {
 		setOverlayLocation(getOverlayComponents()[0], location);
 	}
 
-	public void switchIcon(final BufferedImage newicon) {
+	public void setIcon(final BufferedImage newicon) {
 		if (getOverlayComponents()[0] instanceof ValidationPanelIcon) {
 			((ValidationPanelIcon) getOverlayComponents()[0]).setImage(newicon);
 			((ValidationPanelIcon) getOverlayComponents()[0]).setPreferredSize(new Dimension(newicon.getWidth(),
