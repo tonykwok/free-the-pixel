@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <jnlp spec="6.0+" codebase="http://kenai.com/projects/mabs-swing/downloads/download/jnlp/" >
+ 
+   	<information>
+ 		<title>Use case for DialogWithDropShadow and JXlayer</title>
+		<vendor>Mabs</vendor>
+     		<homepage href="http://free-the-pixel.blogspot.com"/>
+     		<description>Use case for DialogWithDropShadow and JXlayer</description>
+	</information>
+ 
+  	
+  	<resources> 
+    		<j2se version="1.6+"/> 
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/freeThePixel.jar"/>
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/Filters.jar"/>
+     		<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/jide-oss.jar"/>
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/jxlayer.jar"/>
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/miglayout.jar"/>
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/substance.jar"/>
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/swingx.jar"/>
+			<jar href="http://kenai.com/projects/mabs-swing/downloads/download/jar/trident.jar"/>		
+   	</resources>
+ 
+   	<application-desc main-class="com.community.xanadu.demo.components.ColorLayerUIDemo">
+		<argument>substance</argument>
+		<argument>frame</argument>
+	</application-desc>
+ </jnlp>
